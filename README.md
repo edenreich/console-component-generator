@@ -1,7 +1,7 @@
 
 # Console Component Generator
 
-Codegen for console component library written in C++.
+Codegen for [console component](https://github.com/edenreich/console-component) library written in C++.
 
 - [Console Component Generator](#Console-Component-Generator)
     - [Usage](#Usage)
