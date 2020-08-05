@@ -175,7 +175,6 @@ ExitCode MakeCommand::handle(Interfaces::InputInterface* input, Interfaces::Outp
     cppFile << "\n";
     cppFile << "    return ExitCode::Ok;\n";
     cppFile << "}\n";
-    cppFile << "\n";
 
     headerFile.close();
 
