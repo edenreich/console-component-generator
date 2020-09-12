@@ -59,7 +59,7 @@ ExitCode MakeCommand::handle(Interfaces::InputInterface* input, Interfaces::Outp
 
     if (!fs::exists(fs::path("commands")))
     {
-        output->info("creating commands directory..");
+        output->info("==> Creating commands directory..");
         fs::create_directory("commands");
     }
 
@@ -68,7 +68,7 @@ ExitCode MakeCommand::handle(Interfaces::InputInterface* input, Interfaces::Outp
     std::string fileName = commandName;
     fileName[commandName.find(':')] = '_';
 
-    output->info("Creating new command %s in commands directory..", commandName.c_str());
+    output->info("==> Creating new command %s in commands directory..", commandName.c_str());
 
     std::ofstream headerFile(fs::path("commands/" + fileName + ".h"));
 
