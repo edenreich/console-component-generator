@@ -2,8 +2,9 @@
 
 #include <iostream>
 #include <fstream>
-
 #include <filesystem>
+
+namespace fs = std::filesystem;
 
 /**
  * Retrieve the name of the command.
