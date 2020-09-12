@@ -2,14 +2,12 @@ cmake_minimum_required(VERSION 3.12 FATAL_ERROR)
 
 project(console-component-generator CXX)
 
-# Add The CPM Package Manager
 if(NOT EXISTS "${CMAKE_HOME_DIRECTORY}/cmake/CPM.cmake")
   file(DOWNLOAD https://raw.githubusercontent.com/TheLartians/CPM.cmake/master/cmake/CPM.cmake "${CMAKE_HOME_DIRECTORY}/cmake/CPM.cmake")
 endif()
 
 include(cmake/CPM.cmake)
 
-# Add The console-component
 CPMAddPackage(
   NAME console
   GITHUB_REPOSITORY edenreich/console-component
