@@ -34,7 +34,8 @@ jobs:
           cmake --build . --target install --config Release
 
       - name: test
-        run: ./bin/console-gen
+        run: |
+          ./bin/console-gen --name todo:list --class TodoList
 
       - uses: actions/upload-artifact@master
         with:
