@@ -1,0 +1,42 @@
+name: Build
+
+on:
+  pull_request:
+    branches:
+      - master
+      - develop
+  push:
+    branches:
+      - master
+      - develop
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        os:
+          - ubuntu-latest
+          - macOS-latest
+          - windows-latest
+    runs-on: "${{ matrix.os }}"
+    steps:
+      - uses: actions/checkout@master
+
+      - name: configure
+        run: |
+          mkdir build
+          cd build
+          cmake .. -DCMAKE_BUILD_TYPE=Release
+
+      - name: build
+        run: |
+          cd build 
+          cmake --build . --target install --config Release
+
+      - name: test
+        run: ../bin/console-gen
+
+      - uses: actions/upload-artifact@master
+        with:
+          name: binaries
+          path: bin
