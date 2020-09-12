@@ -18,28 +18,20 @@ CPMAddPackage(
     "WITH_TESTS Off"
 )
 
-# Move The Default Directory Of The Executable To bin Directory
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/bin)
-
-# Collect Implemention Files Of The Current Project
+include_directories(${CMAKE_BINARY_DIR}/dist/include)
 set(SOURCES_CXX_FILES
   src/main.cpp
+  src/commands/make_command.h
   src/commands/make_command.cpp
 )
 
-# Add The Implemention Files To The Executable
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/bin)
 add_executable(${PROJECT_NAME} ${SOURCES_CXX_FILES})
 
 set_target_properties(
-  ${PROJECT_NAME} 
+  ${PROJECT_NAME}
   PROPERTIES 
     OUTPUT_NAME "console-gen"
 )
 
-target_link_libraries(${PROJECT_NAME} stdc++fs)
-
-# Add The Definition Files
-include_directories(${CMAKE_BINARY_DIR}/dist/include)
-
-# Link The Executable With The Library
-target_link_libraries(${PROJECT_NAME} console)
+target_link_libraries(${PROJECT_NAME} -static stdc++fs console)
