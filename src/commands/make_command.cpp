@@ -5,7 +5,7 @@
 
 #if __APPLE__
 #include <filesystem>
-namespace fs = std::filesystem;
+namespace fs = std::__fs::filesystem;
 #else
 #include <experimental/filesystem>
 namespace fs = std::experimental::filesystem;
