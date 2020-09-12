@@ -5,11 +5,11 @@
 
 #if __APPLE__
 #include <filesystem>
+namespace fs = std::filesystem;
 #else
 #include <experimental/filesystem>
-#endif
-
 namespace fs = std::experimental::filesystem;
+#endif
 
 /**
  * Retrieve the name of the command.
