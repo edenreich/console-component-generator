@@ -35,7 +35,7 @@ jobs:
 
       - name: test
         run: |
-          ./bin/console-gen --name todo:list --class TodoList
+          ./bin/console-gen make:command --name todo:list --class TodoList
 
       - uses: actions/upload-artifact@master
         with:
