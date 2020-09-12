@@ -124,7 +124,7 @@ ExitCode MakeCommand::handle(Interfaces::InputInterface* input, Interfaces::Outp
 
     std::ofstream cppFile(fs::path("commands/" + fileName + ".cpp"));
 
-    cppFile << "#include " << "\"" << fileName << ".h\"\n";
+    cppFile << "#include \"" << fileName << ".h\"\n";
     cppFile << "\n";
     cppFile << "/**\n";
     cppFile << " * Retrieve the name of the command.\n";
@@ -133,7 +133,7 @@ ExitCode MakeCommand::handle(Interfaces::InputInterface* input, Interfaces::Outp
     cppFile << " */\n";
     cppFile << "std::string " << className << "::getName()\n";
     cppFile << "{\n";
-    cppFile << "    return " << "\"" << commandName << "\";\n";
+    cppFile << "    return \"" << commandName << "\";\n";
     cppFile << "}\n";
     cppFile << "\n";
     cppFile << "/**\n";

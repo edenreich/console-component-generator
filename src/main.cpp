@@ -1,6 +1,4 @@
- 
 #include <console/application.h>
-
 #include "commands/make_command.h"
 
 int main(int argc, char* argv[])
