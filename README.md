@@ -10,7 +10,13 @@ Codegen for [console component](https://github.com/edenreich/console-component) 
 
 ## Usage
 
-1. Download binary from [future-release-url] and place it in your global bin directory.
+1. Download binary from https://github.com/edenreich/console-component-generator/releases/download/v1.0.0/console-gen and place it in your global bin directory:
+
+```sh
+curl -sSL https://github.com/edenreich/console-component-generator/releases/download/v1.0.0/console-gen -o console-gen
+chmod u+x console-gen && sudo mv console-gen /usr/bin/console-gen
+```
+
 2. From within your project run:
 
 ```sh
