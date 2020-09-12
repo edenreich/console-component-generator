@@ -1,8 +1,13 @@
 #include "make_command.h"
 
 #include <iostream>
-#include <experimental/filesystem>
 #include <fstream>
+
+#if __APPLE__
+#include <filesystem>
+#elif
+#include <experimental/filesystem>
+#endif
 
 namespace fs = std::experimental::filesystem;
 
