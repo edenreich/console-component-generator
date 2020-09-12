@@ -3,13 +3,7 @@
 #include <iostream>
 #include <fstream>
 
-#if __APPLE__
 #include <filesystem>
-namespace fs = std::__fs::filesystem;
-#else
-#include <experimental/filesystem>
-namespace fs = std::experimental::filesystem;
-#endif
 
 /**
  * Retrieve the name of the command.
