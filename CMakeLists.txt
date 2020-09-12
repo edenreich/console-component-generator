@@ -2,6 +2,9 @@ cmake_minimum_required(VERSION 3.12 FATAL_ERROR)
 
 project(console-component-generator CXX)
 
+set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
 if(NOT EXISTS "${CMAKE_HOME_DIRECTORY}/cmake/CPM.cmake")
   file(DOWNLOAD https://raw.githubusercontent.com/TheLartians/CPM.cmake/master/cmake/CPM.cmake "${CMAKE_HOME_DIRECTORY}/cmake/CPM.cmake")
 endif()
