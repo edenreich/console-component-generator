@@ -34,7 +34,7 @@ jobs:
           cmake --build . --target install --config Release
 
       - name: test
-        run: ../bin/console-gen
+        run: ./bin/console-gen
 
       - uses: actions/upload-artifact@master
         with:
