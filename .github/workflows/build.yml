@@ -29,8 +29,6 @@ jobs:
       - name: Upgrade compilers for Ubuntu
         if: matrix.os == 'ubuntu-latest'
         run: |
-          sudo update-alternatives --remove-all gcc
-          sudo update-alternatives --remove-all g++
           sudo apt-get install -y gcc-8 g++-8
           sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-8 20
           sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-8 20
