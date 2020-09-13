@@ -28,7 +28,7 @@ jobs:
 
       - name: Upgrade compilers for Ubuntu
         if: matrix.os == 'ubuntu-latest'
-        run: apt-get install -y gcc-8 g++-8
+        run: sudo apt-get install -y gcc-8 g++-8
 
       - name: debug
         run: |
@@ -41,12 +41,12 @@ jobs:
         run: |
           mkdir build
           cd build
-          cmake .. -DCMAKE_BUILD_TYPE=Release
+          CC=/usr/bin/gcc-8 CXX=/usr/bin/g++-8 cmake .. -DCMAKE_BUILD_TYPE=Release
 
       - name: build
         run: |
           cd build 
-          cmake --build . --target install --config Release
+          CC=/usr/bin/gcc-8 CXX=/usr/bin/g++-8 cmake --build . --target install --config Release
 
       - name: test
         run: |
