@@ -42,17 +42,19 @@ jobs:
           which gcc
           g++ --version
           gcc --version
+          ls /usr/bin/g++
+          ls /usr/bin/gcc
 
       - name: configure
         run: |
           mkdir build
           cd build
-          cmake .. -DCMAKE_BUILD_TYPE=Release
+          CC=/usr/bin/gcc CXX=/usr/bin/g++ cmake .. -DCMAKE_BUILD_TYPE=Release
 
       - name: build
         run: |
           cd build 
-          cmake --build . --target install --config Release
+          CC=/usr/bin/gcc CXX=/usr/bin/g++ cmake --build . --target install --config Release
 
       - name: test
         run: |
