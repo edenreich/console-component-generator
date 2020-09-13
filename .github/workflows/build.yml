@@ -24,7 +24,7 @@ jobs:
 
       - name: Upgrade compilers for macOS
         if: matrix.os == 'macOS-latest'
-        run: brew reinstall gcc@7
+        run: CXX=clang++ brew reinstall gcc@7
 
       - name: debug
         run: |
