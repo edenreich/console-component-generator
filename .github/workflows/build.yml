@@ -20,21 +20,21 @@ jobs:
           - windows-latest
     runs-on: "${{ matrix.os }}"
     steps:
-      # - uses: actions/checkout@master
+      - uses: actions/checkout@master
 
-      # - name: Upgrade compilers for MacOS
-      #   if: matrix.os == 'macOS-latest'
-      #   run: |
-      #     sudo rm -rf /Library/Developer/CommandLineTools
-      #     xcode-select --install
-      #     CXX=clang++ brew reinstall gcc@8
+      - name: upgrade compilers for macos
+        if: matrix.os == 'macOS-latest'
+        run: |
+          sudo rm -rf /Library/Developer/CommandLineTools
+          xcode-select --install
+          CXX=clang++ brew reinstall gcc@8
 
-      # - name: Upgrade compilers for Ubuntu
-      #   if: matrix.os == 'ubuntu-latest'
-      #   run: |
-      #     sudo apt-get install -y gcc-8 g++-8
-      #     sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-8 20
-      #     sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-8 20
+      - name: upgrade compilers for ubuntu
+        if: matrix.os == 'ubuntu-latest'
+        run: |
+          sudo apt-get install -y gcc-8 g++-8
+          sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-8 20
+          sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-8 20
 
       - name: debug
         run: |
@@ -44,22 +44,37 @@ jobs:
           gcc --version
           printenv
 
-      # - name: configure
-      #   run: |
-      #     mkdir build
-      #     cd build
-      #     CC=/usr/bin/gcc CXX=/usr/bin/g++ cmake .. -DCMAKE_BUILD_TYPE=Release
+      - name: configure
+        if: matrix.os != 'windows-latest'
+        run: |
+          mkdir build
+          cd build
+          CC=/usr/bin/gcc CXX=/usr/bin/g++ cmake .. -DCMAKE_BUILD_TYPE=Release
 
-      # - name: build
-      #   run: |
-      #     cd build 
-      #     CC=/usr/bin/gcc CXX=/usr/bin/g++ cmake --build . --target install --config Release
+      - name: configure
+        if: matrix.os == 'windows-latest'
+        run: |
+          mkdir build
+          cd build
+          CC=/c/ProgramData/Chocolatey/bin/gcc CXX=/c/ProgramData/Chocolatey/bin/g++ cmake .. -DCMAKE_BUILD_TYPE=Release
 
-      # - name: test
-      #   run: |
-      #     ./bin/console-gen make:command --name todo:list --class TodoList
+      - name: build
+        if: matrix.os != 'windows-latest'
+        run: |
+          cd build 
+          CC=/usr/bin/gcc CXX=/usr/bin/g++ cmake --build . --target install --config Release
+    
+      - name: build
+        if: matrix.os == 'windows-latest'
+        run: |
+          cd build 
+          CC=/c/ProgramData/Chocolatey/bin/gcc CXX=/c/ProgramData/Chocolatey/bin/g++ cmake --build . --target install --config Release
 
-      # - uses: actions/upload-artifact@master
-      #   with:
-      #     name: binaries
-      #     path: bin
+      - name: test
+        run: |
+          ./bin/console-gen make:command --name todo:list --class TodoList
+
+      - uses: actions/upload-artifact@master
+        with:
+          name: binaries
+          path: bin
