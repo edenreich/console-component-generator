@@ -34,6 +34,8 @@ set(SOURCES_CXX_FILES
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/bin)
 add_executable(${PROJECT_NAME} ${SOURCES_CXX_FILES})
 
+message(DEBUG ${CMAKE_CXX_COMPILER_ID})
+
 if(CMAKE_CXX_COMPILER_ID MATCHES "MSVC")
   set(CMAKE_FIND_LIBRARY_SUFFIXES ".lib")
   target_compile_options(${PROJECT_NAME} PUBLIC /MT)
@@ -41,7 +43,7 @@ if(CMAKE_CXX_COMPILER_ID MATCHES "MSVC")
   target_link_libraries(${PROJECT_NAME} console)
 elseif(CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   set(CMAKE_FIND_LIBRARY_SUFFIXES ".a")
-  set(CMAKE_EXE_LINKER_FLAGS "-static")
+  # set(CMAKE_EXE_LINKER_FLAGS "-static")
   target_compile_options(${PROJECT_NAME} PUBLIC -Wall)
   target_link_libraries(${PROJECT_NAME} console)
 else()
