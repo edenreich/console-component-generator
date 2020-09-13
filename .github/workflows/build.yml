@@ -15,9 +15,9 @@ jobs:
     strategy:
       matrix:
         os:
-          - ubuntu-latest
-          # - macOS-latest
-          - windows-latest
+          # - ubuntu-latest
+          - macOS-latest
+          # - windows-latest
     runs-on: "${{ matrix.os }}"
     steps:
       - uses: actions/checkout@master
@@ -42,34 +42,20 @@ jobs:
           which gcc
           g++ --version
           gcc --version
+          cmake --version
           printenv
 
       - name: configure
-        if: matrix.os != 'windows-latest'
         run: |
           mkdir build
           cd build
-          CC=/usr/bin/gcc CXX=/usr/bin/g++ cmake .. -DCMAKE_BUILD_TYPE=Release
-
-      - name: configure
-        if: matrix.os == 'windows-latest'
-        run: |
-          mkdir -p build/Release
-          cd build
-          cmake .. -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_COMPILER=/c/ProgramData/Chocolatey/bin/gcc -DCMAKE_CXX_COMPILER=/c/ProgramData/Chocolatey/bin/g++ 
+          cmake .. -DCMAKE_BUILD_TYPE=Release
 
       - name: build
-        if: matrix.os != 'windows-latest'
         run: |
           cd build
-          CC=/usr/bin/gcc CXX=/usr/bin/g++ cmake --build . --target install --config Release
-    
-      - name: build
-        if: matrix.os == 'windows-latest'
-        run: |
-          cd build
-          cmake --build . --target install --config Release
-
+          cmake --build . --config Release
+  
       - name: test
         run: |
           ./bin/console-gen make:command --name todo:list --class TodoList
