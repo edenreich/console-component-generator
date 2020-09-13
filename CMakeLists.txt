@@ -35,4 +35,4 @@ set_target_properties(
     OUTPUT_NAME "console-gen"
 )
 
-target_link_libraries(${PROJECT_NAME} -static stdc++fs console)
+target_link_libraries(${PROJECT_NAME} -static-libgcc -static-libstdc++ -static stdc++fs console)
