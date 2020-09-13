@@ -25,6 +25,7 @@ jobs:
       - name: Upgrade compilers for MacOS
         if: matrix.os == 'macOS-latest'
         run: |
+          sudo rm -rf /Library/Developer/CommandLineTools
           xcode-select --install
           CXX=clang++ brew reinstall gcc@8
 
