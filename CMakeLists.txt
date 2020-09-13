@@ -5,6 +5,7 @@ project(console-component-generator CXX)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(BUILD_SHARED_LIBS OFF)
+set(CMAKE_EXE_LINKER_FLAGS "-static")
 
 if(NOT EXISTS "${CMAKE_HOME_DIRECTORY}/cmake/CPM.cmake")
   file(DOWNLOAD https://raw.githubusercontent.com/TheLartians/CPM.cmake/master/cmake/CPM.cmake "${CMAKE_HOME_DIRECTORY}/cmake/CPM.cmake")
@@ -36,4 +37,11 @@ set_target_properties(
     OUTPUT_NAME "console-gen"
 )
 
-target_link_libraries(${PROJECT_NAME} -static stdc++fs console)
+if(CMAKE_CXX_COMPILER_ID MATCHES "MSVC")
+  set(CMAKE_FIND_LIBRARY_SUFFIXES ".lib")
+  target_compile_options(${PROJECT_NAME} PUBLIC /MT)
+  target_link_options(${PROJECT_NAME} PUBLIC /INCREMENTAL:NO /NODEFAULTLIB:MSVCRT)
+else()
+  set(CMAKE_FIND_LIBRARY_SUFFIXES ".a")
+endif()
+target_link_libraries(${PROJECT_NAME} stdc++fs console)
