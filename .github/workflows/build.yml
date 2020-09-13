@@ -15,29 +15,36 @@ jobs:
     strategy:
       matrix:
         os:
-          # - ubuntu-latest
+          - ubuntu-latest
           - macOS-latest
           # - windows-latest
     runs-on: "${{ matrix.os }}"
     steps:
       - uses: actions/checkout@master
 
-      - name: configure
+      - name: debug
         run: |
-          mkdir build
-          cd build
-          cmake -DCMAKE_C_COMPILER=/usr/bin/gcc -DCMAKE_CXX_COMPILER=/usr/bin/g++ .. -DCMAKE_BUILD_TYPE=Release
+          which g++
+          which gcc
+          g++ --version
+          gcc --version
 
-      - name: build
-        run: |
-          cd build 
-          cmake -DCMAKE_C_COMPILER=/usr/bin/gcc -DCMAKE_CXX_COMPILER=/usr/bin/g++ --build . --target install --config Release
+      # - name: configure
+      #   run: |
+      #     mkdir build
+      #     cd build
+      #     cmake .. -DCMAKE_BUILD_TYPE=Release
 
-      - name: test
-        run: |
-          ./bin/console-gen make:command --name todo:list --class TodoList
+      # - name: build
+      #   run: |
+      #     cd build 
+      #     cmake --build . --target install --config Release
 
-      - uses: actions/upload-artifact@master
-        with:
-          name: binaries
-          path: bin
+      # - name: test
+      #   run: |
+      #     ./bin/console-gen make:command --name todo:list --class TodoList
+
+      # - uses: actions/upload-artifact@master
+      #   with:
+      #     name: binaries
+      #     path: bin
