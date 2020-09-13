@@ -68,7 +68,7 @@ jobs:
         if: matrix.os == 'windows-latest'
         run: |
           cd build
-          cmake -DCMAKE_C_COMPILER=/c/ProgramData/Chocolatey/bin/gcc -DCMAKE_CXX_COMPILER=/c/ProgramData/Chocolatey/bin/g++ --build . --target install --config Release
+          cmake --build . --target install --config Release
 
       - name: test
         run: |
