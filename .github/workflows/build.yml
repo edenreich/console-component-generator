@@ -24,14 +24,14 @@ jobs:
 
       - name: Upgrade compilers for MacOS
         if: matrix.os == 'macOS-latest'
-        run: CXX=clang++ brew reinstall gcc@8
+        run: CXX=clang++ brew reinstall gcc@9
 
       - name: Upgrade compilers for Ubuntu
         if: matrix.os == 'ubuntu-latest'
         run: |
           sudo apt-get install -y gcc-8 g++-8
-          sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-8 20
-          sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-8 20
+          sudo update-alternatives --set gcc gcc /usr/bin/gcc-8
+          sudo update-alternatives --set g++ g++ /usr/bin/g++-8
 
       - name: debug
         run: |
