@@ -20,21 +20,21 @@ jobs:
           - windows-latest
     runs-on: "${{ matrix.os }}"
     steps:
-      - uses: actions/checkout@master
+      # - uses: actions/checkout@master
 
-      - name: Upgrade compilers for MacOS
-        if: matrix.os == 'macOS-latest'
-        run: |
-          sudo rm -rf /Library/Developer/CommandLineTools
-          xcode-select --install
-          CXX=clang++ brew reinstall gcc@8
+      # - name: Upgrade compilers for MacOS
+      #   if: matrix.os == 'macOS-latest'
+      #   run: |
+      #     sudo rm -rf /Library/Developer/CommandLineTools
+      #     xcode-select --install
+      #     CXX=clang++ brew reinstall gcc@8
 
-      - name: Upgrade compilers for Ubuntu
-        if: matrix.os == 'ubuntu-latest'
-        run: |
-          sudo apt-get install -y gcc-8 g++-8
-          sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-8 20
-          sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-8 20
+      # - name: Upgrade compilers for Ubuntu
+      #   if: matrix.os == 'ubuntu-latest'
+      #   run: |
+      #     sudo apt-get install -y gcc-8 g++-8
+      #     sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-8 20
+      #     sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-8 20
 
       - name: debug
         run: |
@@ -42,25 +42,24 @@ jobs:
           which gcc
           g++ --version
           gcc --version
-          ls /usr/bin/g++
-          ls /usr/bin/gcc
+          printenv
 
-      - name: configure
-        run: |
-          mkdir build
-          cd build
-          CC=/usr/bin/gcc CXX=/usr/bin/g++ cmake .. -DCMAKE_BUILD_TYPE=Release
+      # - name: configure
+      #   run: |
+      #     mkdir build
+      #     cd build
+      #     CC=/usr/bin/gcc CXX=/usr/bin/g++ cmake .. -DCMAKE_BUILD_TYPE=Release
 
-      - name: build
-        run: |
-          cd build 
-          CC=/usr/bin/gcc CXX=/usr/bin/g++ cmake --build . --target install --config Release
+      # - name: build
+      #   run: |
+      #     cd build 
+      #     CC=/usr/bin/gcc CXX=/usr/bin/g++ cmake --build . --target install --config Release
 
-      - name: test
-        run: |
-          ./bin/console-gen make:command --name todo:list --class TodoList
+      # - name: test
+      #   run: |
+      #     ./bin/console-gen make:command --name todo:list --class TodoList
 
-      - uses: actions/upload-artifact@master
-        with:
-          name: binaries
-          path: bin
+      # - uses: actions/upload-artifact@master
+      #   with:
+      #     name: binaries
+      #     path: bin
