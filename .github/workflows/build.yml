@@ -54,20 +54,20 @@ jobs:
       - name: configure
         if: matrix.os == 'windows-latest'
         run: |
-          mkdir build
+          mkdir -p build/Release
           cd build
           cmake .. -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_COMPILER=/c/ProgramData/Chocolatey/bin/gcc -DCMAKE_CXX_COMPILER=/c/ProgramData/Chocolatey/bin/g++ 
 
       - name: build
         if: matrix.os != 'windows-latest'
         run: |
-          cd build 
+          cd build
           CC=/usr/bin/gcc CXX=/usr/bin/g++ cmake --build . --target install --config Release
     
       - name: build
         if: matrix.os == 'windows-latest'
         run: |
-          cd build 
+          cd build
           cmake -DCMAKE_C_COMPILER=/c/ProgramData/Chocolatey/bin/gcc -DCMAKE_CXX_COMPILER=/c/ProgramData/Chocolatey/bin/g++ --build . --target install --config Release
 
       - name: test
