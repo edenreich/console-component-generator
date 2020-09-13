@@ -24,7 +24,9 @@ jobs:
 
       - name: Upgrade compilers for MacOS
         if: matrix.os == 'macOS-latest'
-        run: CXX=clang++ brew reinstall gcc@8
+        run: |
+          xcode-select --install
+          CXX=clang++ brew reinstall gcc@8
 
       - name: Upgrade compilers for Ubuntu
         if: matrix.os == 'ubuntu-latest'
