@@ -36,4 +36,8 @@ set_target_properties(
     OUTPUT_NAME "console-gen"
 )
 
-target_link_libraries(${PROJECT_NAME} -static stdc++fs console)
+if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+  target_link_libraries(${PROJECT_NAME} -static stdc++fs console)
+else()
+  target_link_libraries(${PROJECT_NAME} stdc++fs console)
+endif()
